@@ -1,3 +1,27 @@
+@font-face {
+  font-display: swap;
+  font-family: "FiraGO";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/FiraGO-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "FiraGO";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./assets/FiraGO-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "FiraGO";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./assets/FiraGO-Bold.ttf") format("truetype");
+}
+
 *,
 *::before,
 *::after {
@@ -11,5 +35,6 @@ html {
 }
 
 body {
+  font-family: "FiraGO", sans-serif;
   font-size: 1.6rem;
 }
