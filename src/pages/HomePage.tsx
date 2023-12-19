@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Categories from "../components/Categories";
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
         width={1024}
         height={355}
       />
+      <Categories />
     </Wrapper>
   );
 };
@@ -19,6 +21,9 @@ const Wrapper = styled.main`
   background-color: var(--page-background);
   min-height: calc(100vh - 8rem);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h1 {
     width: 22.5rem;
