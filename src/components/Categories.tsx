@@ -6,7 +6,6 @@ import { CategoryType } from "../types/types";
 
 const Categories = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -22,21 +21,12 @@ const Categories = () => {
     fetchCategories();
   }, []);
 
-  console.log(categories);
-
   if (!categories.length) return null;
 
   return (
     <Wrapper>
       {categories.map((category) => {
-        return (
-          <Category
-            key={category.id}
-            category={category}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-          />
-        );
+        return <Category key={category.id} category={category} />;
       })}
     </Wrapper>
   );
@@ -44,7 +34,7 @@ const Categories = () => {
 
 const Wrapper = styled.ul`
   margin-top: 40.8rem;
-  width: 90%;
+  width: 95%;
   list-style: none;
   display: flex;
   gap: 2.4rem;

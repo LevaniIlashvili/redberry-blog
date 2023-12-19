@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import { CategoryType } from "../types/types";
+import { setSelectedCategories } from "../app/redux/categories/categories";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
-const Category = ({
-  category,
-  selectedCategories,
-  setSelectedCategories,
-}: {
-  category: CategoryType;
-  selectedCategories: string[];
-  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-}) => {
+const Category = ({ category }: { category: CategoryType }) => {
+  const dispatch = useAppDispatch();
+  const selectedCategories = useAppSelector(
+    (state) => state.categories.selectedCategories
+  );
   const isSelected = selectedCategories.includes(category.title);
 
   return (
@@ -20,10 +18,14 @@ const Category = ({
         border: `${isSelected ? "1px solid #000000" : "none"}`,
       }}
       onClick={() =>
-        setSelectedCategories((prev) =>
-          isSelected
-            ? prev.filter((item) => item !== category.title)
-            : [...prev, category.title]
+        dispatch(
+          setSelectedCategories(
+            isSelected
+              ? selectedCategories.filter(
+                  (selectedCategory) => selectedCategory !== category.title
+                )
+              : [...selectedCategories, category.title]
+          )
         )
       }
     >
@@ -33,6 +35,7 @@ const Category = ({
 };
 
 const Wrapper = styled.li`
+  cursor: pointer;
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.6rem;
