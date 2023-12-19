@@ -1,6 +1,8 @@
 :root {
   --white: #ffffff;
+  --black: #1a1a1f;
   --button-color-blue: #5d37f3;
+  --page-background: #f3f2fa;
 }
 
 @font-face {
