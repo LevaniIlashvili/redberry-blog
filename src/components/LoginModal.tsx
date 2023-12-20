@@ -1,3 +1,4 @@
+import { SetStateAction, useState } from "react";
 import styled from "styled-components";
 
 const LoginModal = ({
@@ -5,6 +6,12 @@ const LoginModal = ({
 }: {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [email, setEmail] = useState("");
+
+  const hadnleChange = (e: { target: { value: SetStateAction<string> } }) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <Wrapper>
       <div className="overlay" onClick={() => setIsModalOpen(false)}></div>
@@ -27,6 +34,8 @@ const LoginModal = ({
             type="email"
             id="email"
             placeholder="Example@redberry.ge"
+            value={email}
+            onChange={hadnleChange}
           />
         </div>
         <button className="login-btn">შესვლა</button>
