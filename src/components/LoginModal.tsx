@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const LoginModal = ({
@@ -7,6 +7,20 @@ const LoginModal = ({
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!email) {
+      setError("");
+      return;
+    }
+
+    if (!email.endsWith("@redberry.ge")) {
+      setError("ელ-ფოსტა უნდა ბოლოვდებოდეს @redberry.ge-ით");
+    } else {
+      setError("");
+    }
+  }, [email]);
 
   const hadnleChange = (e: { target: { value: SetStateAction<string> } }) => {
     setEmail(e.target.value);
@@ -36,7 +50,27 @@ const LoginModal = ({
             placeholder="Example@redberry.ge"
             value={email}
             onChange={hadnleChange}
+            required
+            style={{
+              borderColor: error
+                ? "var(--error-color)"
+                : "var(--button-color-blue)",
+            }}
           />
+          {error && (
+            <div
+              className="error-container"
+              style={{ color: "var(--error-color)" }}
+            >
+              <img
+                src="src/assets/error-icon.svg"
+                alt="error icon"
+                width={20}
+                height={20}
+              />
+              <span>{error}</span>
+            </div>
+          )}
         </div>
         <button className="login-btn">შესვლა</button>
       </section>
@@ -69,7 +103,7 @@ const Wrapper = styled.div`
 
   .modal-content {
     width: 48rem;
-    height: 27.2rem;
+    /* height: 27.2rem; */
     background-color: #ffffff;
     z-index: 2;
     border-radius: 1.2rem;
@@ -100,6 +134,14 @@ const Wrapper = styled.div`
     gap: 0.8rem;
   }
 
+  .error-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+
   .input-label {
     font-size: 1.4rem;
     font-weight: 500;
@@ -110,7 +152,6 @@ const Wrapper = styled.div`
     width: 43.2rem;
     height: 4.4rem;
     border-radius: 1.2rem;
-    border: 1px solid var(--button-color-blue);
     font-style: normal;
     font-family: inherit;
     font-size: 1.4rem;
