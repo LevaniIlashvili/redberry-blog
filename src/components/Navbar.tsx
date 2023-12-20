@@ -1,6 +1,10 @@
+import { useState } from "react";
 import styled from "styled-components";
+import LoginModal from "./LoginModal";
 
 const Navbar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Wrapper>
       <img
@@ -9,7 +13,8 @@ const Navbar = () => {
         width={150}
         height={24}
       />
-      <button>შესვლა</button>
+      <button onClick={() => setIsModalOpen((prev) => !prev)}>შესვლა</button>
+      {isModalOpen && <LoginModal setIsModalOpen={setIsModalOpen} />}
     </Wrapper>
   );
 };
@@ -33,6 +38,7 @@ const Wrapper = styled.nav`
     border: none;
     font-size: 1.4rem;
     line-height: 2rem;
+    cursor: pointer;
   }
 `;
 
