@@ -1,9 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import LoginModal from "./LoginModal";
+import { useAppSelector } from "../app/hooks";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isLoggedIn = useAppSelector((state) => state.user.loggedIn);
 
   return (
     <Wrapper>
@@ -13,7 +15,11 @@ const Navbar = () => {
         width={150}
         height={24}
       />
-      <button onClick={() => setIsModalOpen((prev) => !prev)}>შესვლა</button>
+      {!isLoggedIn ? (
+        <button onClick={() => setIsModalOpen((prev) => !prev)}>შესვლა</button>
+      ) : (
+        <button>დაამატე ბლოგი</button>
+      )}
       {isModalOpen && <LoginModal setIsModalOpen={setIsModalOpen} />}
     </Wrapper>
   );
