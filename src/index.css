@@ -4,8 +4,14 @@
   --gray: #85858d;
   --light-gray: #e4e3eb;
   --blue: #5d37f3;
+  --button-hover-color: #512be7;
+  --button-active-color: #4721dd;
   --error-color: #ea1919;
+  --success-color: #14d81c;
   --page-background: #f3f2fa;
+  --input-background-color: #fcfcfd;
+  --input-hover-background-color: #f9f9fa;
+  --input-focus-background-color: #f7f7ff;
 }
 
 @font-face {
@@ -47,4 +53,58 @@ html {
 body {
   font-family: "FiraGO", sans-serif;
   font-size: 1.6rem;
+}
+
+.btn {
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 0.8rem;
+  padding: 1rem 2rem;
+  font-family: inherit;
+  font-weight: 500;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--button-hover-color);
+}
+
+.btn:active {
+  background-color: var(--button-active-color);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea,
+select {
+  border-radius: 1.2rem;
+  font-style: normal;
+  font-family: inherit;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  padding: 1.2rem 1.6rem;
+  background-color: var(--input-background-color);
+  outline: none;
+  border: 1px solid var(--light-gray);
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="date"]:hover,
+textarea:hover,
+select:hover {
+  background-color: var(--input-hover-background-color);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  border: 1.5px solid var(--blue);
+  background-color: var(--input-focus-background-color);
 }
