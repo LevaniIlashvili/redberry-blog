@@ -47,14 +47,14 @@ const Wrapper = styled.nav`
   display: flex;
   align-items: center;
   padding: 0 7.6rem;
-  border-bottom: 1px solid #e4e3eb;
+  border-bottom: 1px solid var(--light-gray);
 
   .redberry-logo {
     cursor: pointer;
   }
 
   button {
-    background-color: var(--button-color-blue);
+    background-color: var(--blue);
     color: var(--white);
     border-radius: 0.8rem;
     padding: 1rem 2rem;
