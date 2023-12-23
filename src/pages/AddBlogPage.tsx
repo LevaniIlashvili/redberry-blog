@@ -73,6 +73,7 @@ const Wrapper = styled.main`
   .arrow-icon {
     position: absolute;
     left: 7.6rem;
+    cursor: pointer;
   }
 
   form {
@@ -118,24 +119,11 @@ const Wrapper = styled.main`
   textarea {
     width: 28.8rem;
     height: 4.4rem;
-    border-radius: 1.2rem;
-    border: 1px solid var(--light-gray);
-    background: #fcfcfd;
-    padding: 1.2rem 1.6rem;
-    color: var(--black);
-    outline: none;
-    font-size: 1.4rem;
-    line-height: 2rem;
   }
 
   input[type="text"]::placeholder,
   textarea::placeholder {
     color: var(--gray);
-  }
-
-  input[type="text"]:focus,
-  textarea:focus {
-    border: 1.5px solid var(--blue);
   }
 
   .validation-requirements {
@@ -166,16 +154,11 @@ const Wrapper = styled.main`
   input[type="date"] {
     width: 28.8rem;
     height: 4.4rem;
-    border-radius: 1.2rem;
-    border: 1px solid var(--light-gray);
-    padding: 1.2rem 4.8rem;
   }
 
   select {
     width: 28.8rem;
     height: 4.4rem;
-    border-radius: 1.2rem;
-    border: 1px solid var(--light-gray);
   }
 
   .email-container {
