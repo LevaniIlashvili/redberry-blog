@@ -28,11 +28,15 @@ const Navbar = () => {
         onClick={() => navigate("/")}
       />
       {!isLoggedIn ? (
-        <button onClick={() => setIsModalOpen((prev) => !prev)}>შესვლა</button>
+        <button className="btn" onClick={() => setIsModalOpen((prev) => !prev)}>
+          შესვლა
+        </button>
       ) : (
         <>
           {currentPath !== "/add-blog" && (
-            <button onClick={() => navigate("/add-blog")}>დაამატე ბლოგი</button>
+            <button className="btn" onClick={() => navigate("/add-blog")}>
+              დაამატე ბლოგი
+            </button>
           )}
         </>
       )}
@@ -50,19 +54,6 @@ const Wrapper = styled.nav`
   border-bottom: 1px solid var(--light-gray);
 
   .redberry-logo {
-    cursor: pointer;
-  }
-
-  button {
-    background-color: var(--blue);
-    color: var(--white);
-    border-radius: 0.8rem;
-    padding: 1rem 2rem;
-    font-family: inherit;
-    font-weight: 500;
-    border: none;
-    font-size: 1.4rem;
-    line-height: 2rem;
     cursor: pointer;
   }
 `;
