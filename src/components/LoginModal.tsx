@@ -55,14 +55,15 @@ const LoginModal = ({
       <section className="modal-content">
         {!loggedIn ? (
           <>
-            <img
-              src="src/assets/close-icon.svg"
-              alt="x icon"
-              width={24}
-              height={24}
-              className="close-icon"
-              onClick={() => setIsModalOpen(false)}
-            />
+            <button className="close-btn" onClick={() => setIsModalOpen(false)}>
+              <img
+                src="src/assets/close-icon.svg"
+                alt="x icon"
+                width={24}
+                height={24}
+                className="close-icon"
+              />
+            </button>
             <h3 className="header">შესვლა</h3>
             <div className="input-container">
               <label className="input-label" htmlFor="email">
@@ -77,7 +78,16 @@ const LoginModal = ({
                 onChange={hadnleChange}
                 required
                 style={{
-                  borderColor: error && "var(--error-color)",
+                  borderColor: error
+                    ? "var(--error-color)"
+                    : email.endsWith("@redberry.ge")
+                    ? "var(--success-color)"
+                    : "",
+                  backgroundColor: error
+                    ? "#FAF2F3"
+                    : email.endsWith("@redberry.ge")
+                    ? "#F2FAF3"
+                    : "",
                 }}
               />
               {error && (
@@ -102,6 +112,18 @@ const LoginModal = ({
         ) : (
           <>
             <div className="successful-login">
+              <button
+                className="close-btn"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <img
+                  src="src/assets/close-icon.svg"
+                  alt="x icon"
+                  width={24}
+                  height={24}
+                  className="close-icon"
+                />
+              </button>
               <img src="src/assets/tick-circle.svg" />
               <h3>წარმატებული ავტორიზაცია</h3>
             </div>
@@ -156,11 +178,26 @@ const Wrapper = styled.div`
     position: relative;
   }
 
-  .close-icon {
+  .close-btn {
     position: absolute;
     right: 2rem;
     top: 2rem;
     cursor: pointer;
+    padding: 0.8rem;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+  }
+
+  .close-btn:hover {
+    background-color: #f5f4f9;
+  }
+
+  .close-btn:active {
+    background-color: #ebeaef;
   }
 
   .header {
@@ -194,24 +231,10 @@ const Wrapper = styled.div`
   .email-input {
     width: 43.2rem;
     height: 4.4rem;
-    border-radius: 1.2rem;
-    font-style: normal;
-    font-family: inherit;
-    font-size: 1.4rem;
-    line-height: 2rem;
-    padding: 1.2rem 1.6rem;
-    background-color: #f7f7f7;
-    outline: none;
-    border: 1px solid var(--light-gray);
-  }
-
-  .email-input:focus {
-    border: 1px solid var(--blue);
   }
 
   .btn {
     width: 100%;
-    cursor: pointer;
   }
 
   .successful-login {
