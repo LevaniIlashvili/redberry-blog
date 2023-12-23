@@ -83,6 +83,10 @@ const Wrapper = styled.div`
   background-color: #f4f3ff;
   margin-bottom: 2.4rem;
 
+  &:hover {
+    background-color: #f1effb;
+  }
+
   img {
     margin-bottom: 2.4rem;
   }
