@@ -77,9 +77,7 @@ const LoginModal = ({
                 onChange={hadnleChange}
                 required
                 style={{
-                  borderColor: error
-                    ? "var(--error-color)"
-                    : "var(--button-color-blue)",
+                  borderColor: error && "var(--error-color)",
                 }}
               />
               {error && (
@@ -138,7 +136,7 @@ const Wrapper = styled.div`
   .overlay {
     width: 100%;
     height: 100%;
-    background-color: #1a1a1f;
+    background-color: var(--black);
     opacity: 0.24;
     position: absolute;
     top: 0;
@@ -148,7 +146,7 @@ const Wrapper = styled.div`
 
   .modal-content {
     width: 48rem;
-    background-color: #ffffff;
+    background-color: var(--white);
     z-index: 2;
     border-radius: 1.2rem;
     padding: 4rem 2.4rem;
@@ -204,6 +202,11 @@ const Wrapper = styled.div`
     padding: 1.2rem 1.6rem;
     background-color: #f7f7f7;
     outline: none;
+    border: 1px solid var(--light-gray);
+  }
+
+  .email-input:focus {
+    border: 1px solid var(--blue);
   }
 
   .btn {
