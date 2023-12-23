@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import UploadImage from "../components/UploadImage";
+import { useState } from "react";
 
 const AddBlogPage = () => {
+  const [image, setImage] = useState<File | null>(null);
+
   return (
     <Wrapper>
       <img
@@ -13,20 +17,7 @@ const AddBlogPage = () => {
       <form>
         <h1 className="header">ბლოგის დამატება</h1>
         <span className="input-header">ატვირთეთ ფოტო</span>
-        <div className="upload-file-container">
-          <img
-            src="src/assets/upload-icon.svg"
-            alt="upload file icon"
-            className="upload-file-icon"
-            width={40}
-            height={40}
-          />
-          <p>
-            ჩააგდეთ ფაილი აქ ან{" "}
-            <label className="upload-file-label">აირჩიეთ ფაილი</label>
-          </p>
-          <input type="file" id="blog-image" />
-        </div>
+        <UploadImage image={image} setImage={setImage} />
         <div className="author-and-title-container">
           <div>
             <span className="input-header">ავტორი *</span>
@@ -103,35 +94,8 @@ const Wrapper = styled.main`
     margin-bottom: 0.8rem;
   }
 
-  .upload-file-container {
-    width: 60rem;
-    height: 18rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1.2rem;
-    border: 1px dashed var(--gray);
-    background-color: #f4f3ff;
-    margin-bottom: 2.4rem;
-  }
-
-  .upload-file-icon {
-    margin-bottom: 2.4rem;
-  }
-
   input[type="file"] {
     display: none;
-  }
-
-  .upload-file-container p {
-    font-size: 1.4rem;
-  }
-
-  .upload-file-label {
-    text-decoration: underline;
-    font-weight: 500;
-    cursor: pointer;
   }
 
   .author-and-title-container {
