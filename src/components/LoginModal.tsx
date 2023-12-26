@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login } from "../app/redux/user/user";
+import ErrorMessage from "./ErrorMessage";
 
 const LoginModal = ({
   setIsModalOpen,
@@ -90,20 +91,7 @@ const LoginModal = ({
                     : "",
                 }}
               />
-              {error && (
-                <div
-                  className="error-container"
-                  style={{ color: "var(--error-color)" }}
-                >
-                  <img
-                    src="src/assets/error-icon.svg"
-                    alt="error icon"
-                    width={20}
-                    height={20}
-                  />
-                  <span>{error}</span>
-                </div>
-              )}
+              {error && <ErrorMessage error={error} />}
             </div>
             <button onClick={() => handleSubmit()} className="btn">
               შესვლა
@@ -212,14 +200,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     gap: 0.8rem;
     margin-bottom: 2.4rem;
-  }
-
-  .error-container {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    font-size: 1.2rem;
-    line-height: 2rem;
   }
 
   .input-label {
