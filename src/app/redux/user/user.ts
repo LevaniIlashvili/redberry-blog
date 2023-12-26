@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: localStorage.getItem("loggedIn") === "true" ? true : false,
 };
 
 const userSlice = createSlice({
@@ -10,6 +10,7 @@ const userSlice = createSlice({
   reducers: {
     login: (state) => {
       state.loggedIn = true;
+      localStorage.setItem("loggedIn", "true");
     },
   },
 });
