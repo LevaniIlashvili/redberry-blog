@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import UploadImage from "../components/UploadImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorMessage from "../components/ErrorMessage";
 import CategoryInput from "../components/CategoryInput";
 import { CategoryType } from "../types/types";
@@ -11,30 +11,34 @@ const AddBlogPage = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState<File | null>(null);
   const [author, setAuthor] = useState({
-    author: "",
+    author: localStorage.getItem("author") || "",
     isCharValid: false,
     isWordValid: false,
     isGeorgian: false,
     isFocused: false,
   });
   const [title, setTitle] = useState({
-    title: "",
+    title: localStorage.getItem("title") || "",
     isCharValid: false,
     isFocused: false,
   });
   const [description, setDescription] = useState({
-    description: "",
+    description: localStorage.getItem("description") || "",
     isCharValid: false,
     isFocused: false,
   });
   const [date, setDate] = useState({
-    date: "",
+    date: localStorage.getItem("date") || "",
     isValid: false,
     isFocused: false,
   });
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>(
+    localStorage.getItem("categories")
+      ? JSON.parse(localStorage.getItem("categories")!)
+      : []
+  );
   const [email, setEmail] = useState({
-    email: "",
+    email: localStorage.getItem("email") || "",
     isFocused: false,
     isValid: false,
   });
@@ -53,6 +57,7 @@ const AddBlogPage = () => {
       isWordValid,
       isGeorgian,
     });
+    localStorage.setItem("author", newAuthor);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +65,7 @@ const AddBlogPage = () => {
     const isCharValid = newTitle.length >= 2;
 
     setTitle({ ...title, title: newTitle, isCharValid });
+    localStorage.setItem("title", newTitle);
   };
 
   const handleDescriptionChange = (
@@ -73,6 +79,7 @@ const AddBlogPage = () => {
       description: newDescription,
       isCharValid,
     });
+    localStorage.setItem("description", newDescription);
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +89,7 @@ const AddBlogPage = () => {
     console.log(e.target.value.length);
     if (e.target.value.length === 10 && inputDate > now) isDateValid = true;
     setDate({ ...date, date: e.target.value, isValid: isDateValid });
+    localStorage.setItem("date", e.target.value);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +97,7 @@ const AddBlogPage = () => {
     const isValid = newEmail.endsWith("@redberry.ge");
 
     setEmail({ ...email, email: newEmail, isValid });
+    localStorage.setItem("email", newEmail);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,6 +129,34 @@ const AddBlogPage = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const authorEvent: React.ChangeEvent<HTMLInputElement> = {
+      target: { value: author.author },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    const titleEvent: React.ChangeEvent<HTMLInputElement> = {
+      target: { value: title.title },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    const descriptionEvent: React.ChangeEvent<HTMLTextAreaElement> = {
+      target: { value: description.description },
+    } as React.ChangeEvent<HTMLTextAreaElement>;
+
+    const dateEvent: React.ChangeEvent<HTMLInputElement> = {
+      target: { value: date.date },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    const emailEvent: React.ChangeEvent<HTMLInputElement> = {
+      target: { value: email.email },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    handleAuthorChange(authorEvent);
+    handleTitleChange(titleEvent);
+    handleDescriptionChange(descriptionEvent);
+    handleDateChange(dateEvent);
+    handleEmailChange(emailEvent);
+  }, []);
 
   const disabled =
     image &&
