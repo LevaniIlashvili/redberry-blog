@@ -6,9 +6,11 @@ import CategoryInput from "../components/CategoryInput";
 import { CategoryType } from "../types/types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AddBlogModal from "../components/AddBlogModal";
 
 const AddBlogPage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [author, setAuthor] = useState({
     author: localStorage.getItem("author") || "",
@@ -37,6 +39,10 @@ const AddBlogPage = () => {
       ? JSON.parse(localStorage.getItem("categories")!)
       : []
   );
+  const setSelectedCategories = (categories: CategoryType[]) => {
+    setCategories(categories);
+    localStorage.setItem("categories", JSON.stringify(categories));
+  };
   const [email, setEmail] = useState({
     email: localStorage.getItem("email") || "",
     isFocused: false,
@@ -124,6 +130,7 @@ const AddBlogPage = () => {
           },
         }
       );
+      setIsModalOpen(true);
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -158,6 +165,21 @@ const AddBlogPage = () => {
     handleEmailChange(emailEvent);
   }, []);
 
+  useEffect(() => {
+    // Disable scrolling when the modal is open
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      // Revert to the original overflow style when the modal is closed
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup: Revert to the original overflow style when the component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
   const disabled =
     image &&
     author.isCharValid &&
@@ -173,6 +195,27 @@ const AddBlogPage = () => {
 
   return (
     <Wrapper>
+      {isModalOpen && (
+        <AddBlogModal
+          handleClick={() => {
+            setIsModalOpen(false);
+            navigate("/");
+            setImage(null);
+            setAuthor({ ...author, author: "" });
+            localStorage.removeItem("author");
+            setTitle({ ...title, title: "" });
+            localStorage.removeItem("title");
+            setDescription({ ...description, description: "" });
+            localStorage.removeItem("description");
+            setDate({ ...date, date: "" });
+            localStorage.removeItem("date");
+            setCategories([]);
+            localStorage.removeItem("categories");
+            setEmail({ ...email, email: "" });
+            localStorage.removeItem("email");
+          }}
+        />
+      )}
       <img
         src="src/assets/arrow.svg"
         alt="arrow icon"
@@ -393,7 +436,7 @@ const AddBlogPage = () => {
             <span className="input-header">კატეგორია *</span>
             <CategoryInput
               selectedCategories={categories}
-              setSelectedCategories={setCategories}
+              setSelectedCategories={setSelectedCategories}
             />
           </div>
         </div>
@@ -446,7 +489,6 @@ const AddBlogPage = () => {
 const Wrapper = styled.main`
   height: 120rem;
   background-color: #fbfaff;
-  position: relative;
   padding-top: 4rem;
 
   .arrow-icon {
