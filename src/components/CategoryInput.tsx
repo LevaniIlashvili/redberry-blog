@@ -8,7 +8,7 @@ const CategoryInput = ({
   setSelectedCategories,
 }: {
   selectedCategories: CategoryType[];
-  setSelectedCategories: React.Dispatch<React.SetStateAction<CategoryType[]>>;
+  setSelectedCategories: (categories: CategoryType[]) => void;
 }) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
