@@ -5,7 +5,9 @@ interface Categories {
 }
 
 const initialState: Categories = {
-  selectedCategories: [],
+  selectedCategories: localStorage.getItem("selectedCategories")
+    ? JSON.parse(localStorage.getItem("selectedCategories")!)
+    : [],
 };
 
 const categoriesSlice = createSlice({
@@ -14,6 +16,10 @@ const categoriesSlice = createSlice({
   reducers: {
     setSelectedCategories: (state, action) => {
       state.selectedCategories = action.payload;
+      localStorage.setItem(
+        "selectedCategories",
+        JSON.stringify(action.payload)
+      );
     },
   },
 });
