@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import AddBlogPage from "./pages/AddBlogPage";
 import PrivateRoute from "./components/PrivateRoute";
+import { BlogPage } from "./pages/BlogPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/blog/:id" element={<BlogPage />} />
       </Routes>
     </Router>
   );
