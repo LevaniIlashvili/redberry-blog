@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Categories from "../components/Categories";
+import BlogFeed from "../components/BlogFeed";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
         height={355}
       />
       <Categories />
+      <BlogFeed />
     </Wrapper>
   );
 };
