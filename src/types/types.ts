@@ -13,4 +13,5 @@ export interface BlogType {
   categories: CategoryType[];
   publish_date: string;
   image: string;
+  email: string;
 }
