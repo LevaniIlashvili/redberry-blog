@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import BlogCard from "./BlogCard";
 import { BlogType } from "../types/types";
+import { useAppSelector } from "../app/hooks";
 
 const BlogFeed = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
+  const selectedCategories = useAppSelector(
+    (state) => state.categories.selectedCategories
+  );
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -29,7 +33,14 @@ const BlogFeed = () => {
 
   return (
     <Wrapper>
-      {blogs.map((blog) => {
+      {(selectedCategories.length
+        ? blogs.filter((blog) =>
+            blog.categories.some((category) =>
+              selectedCategories.includes(category.title)
+            )
+          )
+        : blogs
+      ).map((blog) => {
         return <BlogCard key={blog.id} blog={blog} />;
       })}
     </Wrapper>
