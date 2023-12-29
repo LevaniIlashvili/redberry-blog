@@ -7,8 +7,11 @@ import { CategoryType } from "../types/types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AddBlogModal from "../components/AddBlogModal";
+import { setBlogs } from "../app/redux/blogs/blogs";
+import { useAppSelector } from "../app/hooks";
 
 const AddBlogPage = () => {
+  const blogs = useAppSelector((state) => state.blogs.blogs);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
@@ -130,6 +133,7 @@ const AddBlogPage = () => {
           },
         }
       );
+      setBlogs([...blogs, res.data]);
       setIsModalOpen(true);
       console.log(res);
     } catch (error) {
