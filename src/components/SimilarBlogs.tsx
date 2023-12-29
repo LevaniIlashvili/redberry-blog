@@ -65,6 +65,7 @@ const SimilarBlogs = ({ categories }: { categories: CategoryType[] }) => {
 
 const Wrapper = styled.section`
   width: 128.8rem;
+  margin-bottom: 47.5rem;
 
   .similar-blogs-header-container {
     margin-bottom: 4rem;

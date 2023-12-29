@@ -31,50 +31,53 @@ export const BlogPage = () => {
     fetchBlog();
   }, [id]);
 
-  if (!blog) {
-    return <h1>Loading...</h1>;
-  }
-
   return (
     <Wrapper>
-      <button
-        type="button"
-        className="navigate-home-btn"
-        onClick={() => navigate("/")}
-      >
-        <img src="/left-arrow-black.svg" alt="left arrow" />
-      </button>
-      <section className="blog">
-        <img src={blog.image} alt="blog-image" className="blog-image" />
-        <div className="header">
-          <div className="blog-info">
-            <h4 className="blog-author">{blog.author}</h4>
-            <span className="blog-publish-date">{blog.publish_date}</span>
-            {blog.email && <span className="blog-email">•{blog.email}</span>}
-          </div>
-          <ul>
-            {blog.categories.map((category) => (
-              <li
-                style={{
-                  backgroundColor: category.background_color,
-                  color: category.text_color,
-                }}
-                key={category.id}
-              >
-                {category.title}
-              </li>
-            ))}
-          </ul>
-          <h1 className="single-blog-title">{blog.title}</h1>
-        </div>
-        <p className="blog-description">{blog.description}</p>
-      </section>
-      <SimilarBlogs categories={blog.categories} />
+      {blog && (
+        <>
+          <button
+            type="button"
+            className="navigate-home-btn"
+            onClick={() => navigate("/")}
+          >
+            <img src="/left-arrow-black.svg" alt="left arrow" />
+          </button>
+          <section className="blog">
+            <img src={blog.image} alt="blog-image" className="blog-image" />
+            <div className="header">
+              <div className="blog-info">
+                <h4 className="blog-author">{blog.author}</h4>
+                <span className="blog-publish-date">{blog.publish_date}</span>
+                {blog.email && (
+                  <span className="blog-email">•{blog.email}</span>
+                )}
+              </div>
+              <ul>
+                {blog.categories.map((category) => (
+                  <li
+                    style={{
+                      backgroundColor: category.background_color,
+                      color: category.text_color,
+                    }}
+                    key={category.id}
+                  >
+                    {category.title}
+                  </li>
+                ))}
+              </ul>
+              <h1 className="single-blog-title">{blog.title}</h1>
+            </div>
+            <p className="blog-description">{blog.description}</p>
+          </section>
+          <SimilarBlogs categories={blog.categories} />
+        </>
+      )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.main`
+  min-height: 100vh;
   width: 100%;
   padding-top: 4rem;
   display: flex;
