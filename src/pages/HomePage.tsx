@@ -9,7 +9,7 @@ const HomePage = () => {
         <h1>ბლოგი</h1>
         <img
           className="galaxy-logo"
-          src="src/assets/galaxy-logo.svg"
+          src="/galaxy-logo.svg"
           alt="galaxy logo"
           width={1024}
           height={355}

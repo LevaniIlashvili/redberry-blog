@@ -32,12 +32,7 @@ const BlogCard = ({ blog }: { blog: BlogType }) => {
         <p className="blog-description">{blog.description}</p>
         <Link to={`/blog/${blog.id}`}>
           სრულად ნახვა
-          <img
-            src="src/assets/see-more.svg"
-            alt="see-more"
-            width={20}
-            height={20}
-          />
+          <img src="/see-more.svg" alt="see-more" width={20} height={20} />
         </Link>
       </div>
     </Wrapper>

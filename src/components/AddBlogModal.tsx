@@ -7,14 +7,14 @@ const AddBlogModal = ({ handleClick }) => {
       <div className="modal-content">
         <button className="close-btn" onClick={handleClick}>
           <img
-            src="src/assets/close-icon.svg"
+            src="/close-icon.svg"
             alt="x icon"
             width={24}
             height={24}
             className="close-icon"
           />
         </button>
-        <img src="src/assets/tick-circle.svg" className="success-icon" />
+        <img src="/tick-circle.svg" className="success-icon" />
         <h3 className="header">ჩანაწერი წარმატებით დაემატა</h3>
         <button className="btn" onClick={handleClick}>
           მთავარ გვერდზე დაბრუნება

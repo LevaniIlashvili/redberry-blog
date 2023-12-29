@@ -56,7 +56,7 @@ const CategoryInput = ({
                   >
                     {selectedCategory.title}
                     <img
-                      src="src/assets/delete-category.svg"
+                      src="/delete-category.svg"
                       width={16}
                       height={16}
                       onClick={(e) => {
@@ -75,12 +75,7 @@ const CategoryInput = ({
           )}
         </div>
         <button className="toggle-dropdown-btn" type="button">
-          <img
-            src="src/assets/arrow-down.svg"
-            alt="arrow down"
-            width={20}
-            height={20}
-          />
+          <img src="/arrow-down.svg" alt="arrow down" width={20} height={20} />
         </button>
       </div>
       {dropdownOpen && (

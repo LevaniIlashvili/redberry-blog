@@ -6,12 +6,7 @@ const ErrorMessage = ({ error }: { error: string }) => {
       className="error-container"
       style={{ color: "var(--error-color)" }}
     >
-      <img
-        src="src/assets/error-icon.svg"
-        alt="error icon"
-        width={20}
-        height={20}
-      />
+      <img src="/error-icon.svg" alt="error icon" width={20} height={20} />
       <span>{error}</span>
     </Wrapper>
   );

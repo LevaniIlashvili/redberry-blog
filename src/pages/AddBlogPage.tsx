@@ -214,14 +214,14 @@ const AddBlogPage = () => {
           }}
         />
       )}
-      <img
-        src="src/assets/arrow.svg"
-        alt="arrow icon"
-        className="arrow-icon"
-        width={44}
-        height={44}
-        onClick={() => navigate("/")}
-      />
+      <button type="button" className="navigate-home-btn">
+        <img
+          src="/left-arrow-black.svg"
+          alt="arrow icon"
+          className="arrow-icon"
+          onClick={() => navigate("/")}
+        />
+      </button>
       <form onSubmit={handleSubmit}>
         <h1 className="header">ბლოგის დამატება</h1>
         <span className="input-header">ატვირთეთ ფოტო</span>
@@ -432,10 +432,15 @@ const Wrapper = styled.main`
   background-color: #fbfaff;
   padding-top: 4rem;
 
-  .arrow-icon {
+  .navigate-home-btn {
     position: absolute;
     left: 7.6rem;
     cursor: pointer;
+    border: none;
+    background-color: var(--light-gray);
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
   }
 
   form {

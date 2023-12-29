@@ -58,7 +58,7 @@ const LoginModal = ({
           <>
             <button className="close-btn" onClick={() => setIsModalOpen(false)}>
               <img
-                src="src/assets/close-icon.svg"
+                src="/close-icon.svg"
                 alt="x icon"
                 width={24}
                 height={24}
@@ -105,14 +105,14 @@ const LoginModal = ({
                 onClick={() => setIsModalOpen(false)}
               >
                 <img
-                  src="src/assets/close-icon.svg"
+                  src="/close-icon.svg"
                   alt="x icon"
                   width={24}
                   height={24}
                   className="close-icon"
                 />
               </button>
-              <img src="src/assets/tick-circle.svg" />
+              <img src="/tick-circle.svg" />
               <h3>წარმატებული ავტორიზაცია</h3>
             </div>
             <button

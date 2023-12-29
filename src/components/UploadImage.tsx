@@ -33,7 +33,7 @@ const UploadImage = ({
           }}
         >
           <img
-            src="src/assets/upload-icon.svg"
+            src="/upload-icon.svg"
             alt="upload file icon"
             className="upload-icon"
             width={40}
@@ -50,7 +50,7 @@ const UploadImage = ({
           <div>
             {" "}
             <img
-              src="src/assets/gallery-icon.svg"
+              src="/gallery-icon.svg"
               alt="galery-icon"
               width={24}
               height={24}
@@ -58,7 +58,7 @@ const UploadImage = ({
             <p>{image.name}</p>
           </div>
           <img
-            src="src/assets/close-icon.svg"
+            src="/close-icon.svg"
             alt="close icon"
             className="close-icon"
             width={24}

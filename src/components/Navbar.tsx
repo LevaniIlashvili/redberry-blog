@@ -20,7 +20,7 @@ const Navbar = () => {
       }}
     >
       <img
-        src="src/assets/redberry-logo.svg"
+        src="/redberry-logo.svg"
         alt="logo"
         className="redberry-logo"
         width={150}
