@@ -4,8 +4,16 @@ const UploadImage = ({
   image,
   setImage,
 }: {
-  image: File | null;
-  setImage: React.Dispatch<React.SetStateAction<File | null>>;
+  image: {
+    file: File | null;
+    name: string | null;
+  };
+  setImage: React.Dispatch<
+    React.SetStateAction<{
+      file: File | null;
+      name: string | null;
+    }>
+  >;
 }) => {
   const saveImage = (file: File) => {
     // Convert the image to base64
@@ -19,7 +27,7 @@ const UploadImage = ({
       );
 
       console.log(file);
-      setImage(file);
+      setImage({ file, name: file.name });
     };
     reader.readAsDataURL(file);
   };
@@ -42,7 +50,7 @@ const UploadImage = ({
 
   return (
     <>
-      {!image ? (
+      {!image.file ? (
         <Wrapper
           onDrop={handleDrop}
           onDragOver={(e) => {
@@ -80,7 +88,7 @@ const UploadImage = ({
             className="close-icon"
             width={24}
             height={24}
-            onClick={() => setImage(null)}
+            onClick={() => setImage({ file: null, name: null })}
           />
         </Wrapper2>
       )}

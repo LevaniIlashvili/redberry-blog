@@ -250,6 +250,7 @@ const AddBlogPage = () => {
             localStorage.removeItem("categories");
             setEmail({ ...email, email: "" });
             localStorage.removeItem("email");
+            localStorage.removeItem("uploadedImage");
           }}
         />
       )}
