@@ -135,7 +135,11 @@ const Wrapper = styled.div`
     width: 24.8rem;
     display: flex;
     gap: 0.8rem;
-    overflow: hidden;
+    overflow: scroll;
+  }
+
+  .category-content::-webkit-scrollbar {
+    display: none;
   }
 
   .toggle-dropdown-btn {
