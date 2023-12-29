@@ -3,6 +3,7 @@ import { BlogType } from "../types/types";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import SimilarBlogs from "../components/SimilarBlogs";
 
 export const BlogPage = () => {
   const [blog, setBlog] = useState<BlogType | null>(null);
@@ -55,10 +56,11 @@ export const BlogPage = () => {
               </li>
             ))}
           </ul>
-          <h1 className="blog-title">{blog.title}</h1>
+          <h1 className="single-blog-title">{blog.title}</h1>
         </div>
         <p className="blog-description">{blog.description}</p>
       </section>
+      <SimilarBlogs categories={blog.categories} />
     </Wrapper>
   );
 };
@@ -67,7 +69,8 @@ const Wrapper = styled.main`
   width: 100%;
   padding-top: 4rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--page-background);
 
   .blog {
@@ -102,7 +105,7 @@ const Wrapper = styled.main`
     color: var(--gray);
   }
 
-  .blog-title {
+  .single-blog-title {
     font-size: 3.2rem;
     font-weight: 700;
     line-height: 4rem;
