@@ -14,7 +14,35 @@ const AddBlogPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<{
+    file: File | null;
+    name: string | null;
+  }>({ file: null, name: null });
+
+  useEffect(() => {
+    // Retrieve the image data from localStorage when the component mounts
+    const savedImageData = localStorage.getItem("uploadedImage");
+
+    if (savedImageData) {
+      // Parse the JSON string to get the object with base64String and name
+      const { base64String, name } = JSON.parse(savedImageData);
+
+      // Convert the base64 string to a Blob (File)
+      const byteCharacters = atob(base64String.split(",")[1]);
+      const byteNumbers = new Array(byteCharacters.length);
+
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: "image/*" });
+
+      // Set the retrieved image and name to the component state
+      setImage({ file: blob as File, name });
+    }
+  }, []);
+
   const [author, setAuthor] = useState({
     author: localStorage.getItem("author") || "",
     isCharValid: false,
@@ -119,7 +147,7 @@ const AddBlogPage = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", image as Blob);
+    formData.append("image", image.file as Blob);
     formData.append("author", author.author);
     formData.append("title", title.title);
     formData.append("description", description.description);
@@ -209,7 +237,7 @@ const AddBlogPage = () => {
           handleClick={() => {
             setIsModalOpen(false);
             navigate("/");
-            setImage(null);
+            setImage({ file: null, name: null });
             setAuthor({ ...author, author: "" });
             localStorage.removeItem("author");
             setTitle({ ...title, title: "" });

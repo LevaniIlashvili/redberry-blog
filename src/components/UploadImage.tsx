@@ -7,9 +7,26 @@ const UploadImage = ({
   image: File | null;
   setImage: React.Dispatch<React.SetStateAction<File | null>>;
 }) => {
+  const saveImage = (file: File) => {
+    // Convert the image to base64
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result as string;
+
+      localStorage.setItem(
+        "uploadedImage",
+        JSON.stringify({ base64String, name: file.name })
+      );
+
+      console.log(file);
+      setImage(file);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0].type.split("/")[0] === "image") {
-      setImage(e.target.files[0]);
+      saveImage(e.target.files[0]);
     }
   };
 
@@ -19,7 +36,7 @@ const UploadImage = ({
     const droppedFile = e.dataTransfer.files[0];
 
     if (droppedFile && droppedFile.type.split("/")[0] === "image") {
-      setImage(droppedFile);
+      saveImage(droppedFile);
     }
   };
 
