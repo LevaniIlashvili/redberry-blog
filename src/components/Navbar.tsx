@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import LoginModal from "./LoginModal";
 import { useAppSelector } from "../app/hooks";
@@ -10,6 +10,21 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isLoggedIn = useAppSelector((state) => state.user.loggedIn);
+
+  useEffect(() => {
+    // Disable scrolling when the modal is open
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      // Revert to the original overflow style when the modal is closed
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup: Revert to the original overflow style when the component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
 
   return (
     <Wrapper
