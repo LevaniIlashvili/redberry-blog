@@ -33,8 +33,7 @@ const Categories = () => {
 };
 
 const Wrapper = styled.ul`
-  margin-top: 40.8rem;
-  width: 95%;
+  width: 68.4rem;
   list-style: none;
   display: flex;
   gap: 2.4rem;

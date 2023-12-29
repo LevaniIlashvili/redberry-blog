@@ -5,14 +5,16 @@ import BlogFeed from "../components/BlogFeed";
 const HomePage = () => {
   return (
     <Wrapper>
-      <h1>ბლოგი</h1>
-      <img
-        className="galaxy-logo"
-        src="src/assets/galaxy-logo.svg"
-        alt="galaxy logo"
-        width={1024}
-        height={355}
-      />
+      <div className="hero">
+        <h1>ბლოგი</h1>
+        <img
+          className="galaxy-logo"
+          src="src/assets/galaxy-logo.svg"
+          alt="galaxy logo"
+          width={1024}
+          height={355}
+        />
+      </div>
       <Categories />
       <BlogFeed />
     </Wrapper>
@@ -26,6 +28,7 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 32.8rem;
 
   h1 {
     width: 22.5rem;
@@ -35,7 +38,7 @@ const Wrapper = styled.main`
     line-height: 7.2rem;
     position: absolute;
     left: 8.9rem;
-    top: 20.9rem;
+    top: 12.8rem;
   }
 
   .galaxy-logo {
@@ -43,7 +46,7 @@ const Wrapper = styled.main`
     height: 20rem;
     position: absolute;
     right: 7.6rem;
-    top: 14.4rem;
+    top: 6.4rem;
   }
 `;
 

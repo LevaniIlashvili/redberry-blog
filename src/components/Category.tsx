@@ -43,6 +43,7 @@ const Wrapper = styled.li`
   border-radius: 3rem;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 `;
 
 export default Category;
