@@ -20,22 +20,18 @@ const AddBlogPage = () => {
     isCharValid: false,
     isWordValid: false,
     isGeorgian: false,
-    isFocused: false,
   });
   const [title, setTitle] = useState({
     title: localStorage.getItem("title") || "",
     isCharValid: false,
-    isFocused: false,
   });
   const [description, setDescription] = useState({
     description: localStorage.getItem("description") || "",
     isCharValid: false,
-    isFocused: false,
   });
   const [date, setDate] = useState({
     date: localStorage.getItem("date") || "",
     isValid: false,
-    isFocused: false,
   });
   const [categories, setCategories] = useState<CategoryType[]>(
     localStorage.getItem("categories")
@@ -48,7 +44,6 @@ const AddBlogPage = () => {
   };
   const [email, setEmail] = useState({
     email: localStorage.getItem("email") || "",
-    isFocused: false,
     isValid: false,
   });
 
@@ -95,7 +90,6 @@ const AddBlogPage = () => {
     const now = new Date();
     const inputDate = new Date(e.target.value);
     let isDateValid = false;
-    console.log(e.target.value.length);
     if (e.target.value.length === 10 && inputDate > now) isDateValid = true;
     setDate({ ...date, date: e.target.value, isValid: isDateValid });
     localStorage.setItem("date", e.target.value);
@@ -240,78 +234,53 @@ const AddBlogPage = () => {
               placeholder="შეიყვანეთ ავტორი"
               value={author.author}
               onChange={handleAuthorChange}
-              onFocus={() => setAuthor({ ...author, isFocused: true })}
-              onBlur={() => setAuthor({ ...author, isFocused: false })}
               style={{
-                backgroundColor:
-                  author.author &&
-                  (!author.isFocused
-                    ? author.isCharValid &&
-                      author.isWordValid &&
-                      author.isGeorgian
-                      ? "#F8FFF8"
-                      : "#FAF2F3"
-                    : ""),
-                borderColor:
-                  author.author &&
-                  !author.isFocused &&
-                  (!author.isCharValid ||
-                    !author.isWordValid ||
-                    !author.isGeorgian)
-                    ? "var(--error-color)"
-                    : !author.isFocused &&
-                      author.isCharValid &&
-                      author.isWordValid &&
-                      author.isGeorgian
+                backgroundColor: author.author
+                  ? author.isGeorgian &&
+                    author.isCharValid &&
+                    author.isWordValid
+                    ? "#F8FFF8"
+                    : "#FAF2F3"
+                  : "",
+                borderColor: author.author
+                  ? author.isGeorgian &&
+                    author.isCharValid &&
+                    author.isWordValid
                     ? "var(--success-color)"
-                    : "",
+                    : "var(--error-color)"
+                  : "",
               }}
             />
             <ul className="validation-requirements">
               <li
                 style={{
-                  color:
-                    (author.author &&
-                      (author.isFocused
-                        ? author.isCharValid
-                          ? "var(--success-color)"
-                          : ""
-                        : author.isCharValid
-                        ? ""
-                        : "var(--error-color)")) ||
-                    "",
+                  color: author.author
+                    ? author.isCharValid
+                      ? "var(--success-color)"
+                      : "var(--error-color)"
+                    : "",
                 }}
               >
                 მინიმუმ 4 სიმბოლო
               </li>
               <li
                 style={{
-                  color:
-                    (author.author &&
-                      (author.isFocused
-                        ? author.isWordValid
-                          ? "var(--success-color)"
-                          : ""
-                        : author.isWordValid
-                        ? ""
-                        : "var(--error-color)")) ||
-                    "",
+                  color: author.author
+                    ? author.isWordValid
+                      ? "var(--success-color)"
+                      : "var(--error-color)"
+                    : "",
                 }}
               >
                 მინიმუმ ორი სიტყვა
               </li>
               <li
                 style={{
-                  color:
-                    (author.author &&
-                      (author.isFocused
-                        ? author.isGeorgian
-                          ? "var(--success-color)"
-                          : ""
-                        : author.isGeorgian
-                        ? ""
-                        : "var(--error-color)")) ||
-                    "",
+                  color: author.author
+                    ? author.isGeorgian
+                      ? "var(--success-color)"
+                      : "var(--error-color)"
+                    : "",
                 }}
               >
                 მხოლოდ ქართული სიმბოლოები
@@ -325,37 +294,27 @@ const AddBlogPage = () => {
               placeholder="შეიყვანეთ სათაური"
               value={title.title}
               onChange={handleTitleChange}
-              onFocus={() => setTitle({ ...title, isFocused: true })}
-              onBlur={() => setTitle({ ...title, isFocused: false })}
               style={{
-                backgroundColor:
-                  title.title &&
-                  (!title.isFocused
-                    ? title.isCharValid
-                      ? "#F8FFF8"
-                      : "#FAF2F3"
-                    : ""),
-                borderColor:
-                  title.title && !title.isFocused && !title.isCharValid
-                    ? "var(--error-color)"
-                    : !title.isFocused && title.isCharValid
+                backgroundColor: title.title
+                  ? title.isCharValid
+                    ? "#F8FFF8"
+                    : "#FAF2F3"
+                  : "",
+                borderColor: title.title
+                  ? title.isCharValid
                     ? "var(--success-color)"
-                    : "",
+                    : "var(--error-color)"
+                  : "",
               }}
             />
             <span
               className="validation-requirements"
               style={{
-                color:
-                  (title.title &&
-                    (title.isFocused
-                      ? title.isCharValid
-                        ? "var(--success-color)"
-                        : ""
-                      : title.isCharValid
-                      ? ""
-                      : "var(--error-color)")) ||
-                  "",
+                color: title.title
+                  ? title.isCharValid
+                    ? "var(--success-color)"
+                    : "var(--error-color)"
+                  : "",
               }}
             >
               მინიმუმ 2 სიმბოლო
@@ -368,39 +327,27 @@ const AddBlogPage = () => {
             placeholder="შეიყვანეთ აღწერა"
             value={description.description}
             onChange={handleDescriptionChange}
-            onFocus={() => setDescription({ ...description, isFocused: true })}
-            onBlur={() => setDescription({ ...description, isFocused: false })}
             style={{
-              backgroundColor:
-                description.description &&
-                (!description.isFocused
-                  ? description.isCharValid
-                    ? "#F8FFF8"
-                    : "#FAF2F3"
-                  : ""),
-              borderColor:
-                description.description &&
-                !description.isFocused &&
-                !description.isCharValid
-                  ? "var(--error-color)"
-                  : !description.isFocused && description.isCharValid
+              backgroundColor: description.description
+                ? description.isCharValid
+                  ? "#F8FFF8"
+                  : "#FAF2F3"
+                : "",
+              borderColor: description.description
+                ? description.isCharValid
                   ? "var(--success-color)"
-                  : "",
+                  : "var(--error-color)"
+                : "",
             }}
           />
           <span
             className="validation-requirements"
             style={{
-              color:
-                (description.description &&
-                  (description.isFocused
-                    ? description.isCharValid
-                      ? "var(--success-color)"
-                      : ""
-                    : description.isCharValid
-                    ? ""
-                    : "var(--error-color)")) ||
-                "",
+              color: description.description
+                ? description.isCharValid
+                  ? "var(--success-color)"
+                  : "var(--error-color)"
+                : "",
             }}
           >
             მინიმუმ 2 სიმბოლო
@@ -412,26 +359,21 @@ const AddBlogPage = () => {
             <input
               type="date"
               value={date.date}
-              onFocus={() => setDate({ ...date, isFocused: true })}
-              onBlur={() => setDate({ ...date, isFocused: false })}
               onChange={handleDateChange}
               style={{
-                backgroundColor:
-                  date.date &&
-                  (!date.isFocused
-                    ? date.isValid
-                      ? "#F8FFF8"
-                      : "#FAF2F3"
-                    : ""),
-                borderColor:
-                  date.date && !date.isFocused && !date.isValid
-                    ? "var(--error-color)"
-                    : !date.isFocused && date.isValid
+                backgroundColor: date.date
+                  ? date.isValid
+                    ? "#F8FFF8"
+                    : "#FAF2F3"
+                  : "",
+                borderColor: date.date
+                  ? date.isValid
                     ? "var(--success-color)"
-                    : "",
+                    : "var(--error-color)"
+                  : "",
               }}
             />
-            {date.date && !date.isFocused && !date.isValid && (
+            {date.date && !date.isValid && (
               <ErrorMessage error="შეიყვანეთ სწორი თარიღი" />
             )}
           </div>
@@ -451,25 +393,20 @@ const AddBlogPage = () => {
             placeholder="შეიყვანეთ ელ-ფოსტა"
             value={email.email}
             onChange={handleEmailChange}
-            onFocus={() => setEmail({ ...email, isFocused: true })}
-            onBlur={() => setEmail({ ...email, isFocused: false })}
             style={{
-              backgroundColor:
-                email.email &&
-                (!email.isFocused
-                  ? email.isValid
-                    ? "#F8FFF8"
-                    : "#FAF2F3"
-                  : ""),
-              borderColor:
-                email.email && !email.isFocused && !email.isValid
-                  ? "var(--error-color)"
-                  : !email.isFocused && email.isValid
+              backgroundColor: email.email
+                ? email.isValid
+                  ? "#F8FFF8"
+                  : "#FAF2F3"
+                : "",
+              borderColor: email.email
+                ? email.isValid
                   ? "var(--success-color)"
-                  : "",
+                  : "var(--error-color)"
+                : "",
             }}
           />
-          {email.email && !email.isFocused && !email.isValid && (
+          {email.email && !email.isValid && (
             <ErrorMessage error="ემაილი უნდა მთავრდებოდეს @redberry.ge-ით" />
           )}
         </div>

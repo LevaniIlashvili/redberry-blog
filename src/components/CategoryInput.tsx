@@ -32,15 +32,8 @@ const CategoryInput = ({
         className={`category-input ${dropdownOpen && "active"}`}
         style={{
           padding: selectedCategories.length ? "0.6rem" : "1.2rem 1.6rem",
-          backgroundColor: dropdownOpen
-            ? "#F7F7FF"
-            : selectedCategories.length && !dropdownOpen
-            ? "#F8FFF8"
-            : "",
-          borderColor:
-            selectedCategories.length && !dropdownOpen
-              ? "var(--success-color)"
-              : "",
+          backgroundColor: selectedCategories.length ? "#F8FFF8" : "",
+          borderColor: selectedCategories.length ? "var(--success-color)" : "",
         }}
         onClick={() => {
           setDropdownOpen((prev) => !prev);
