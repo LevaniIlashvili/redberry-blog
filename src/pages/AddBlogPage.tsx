@@ -88,9 +88,21 @@ const AddBlogPage = () => {
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
     const inputDate = new Date(e.target.value);
+    const inputYear = inputDate.getFullYear();
+    const inputMonth = inputDate.getMonth() + 1;
+    const inputDay = inputDate.getDate();
     let isDateValid = false;
-    if (e.target.value.length === 10 && inputDate > now) isDateValid = true;
+    if (
+      e.target.value.length === 10 &&
+      (inputYear > year ||
+        (inputYear === year && inputMonth > month) ||
+        (inputYear === year && inputMonth === month && inputDay >= day))
+    )
+      isDateValid = true;
     setDate({ ...date, date: e.target.value, isValid: isDateValid });
     localStorage.setItem("date", e.target.value);
   };
