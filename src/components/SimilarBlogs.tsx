@@ -8,7 +8,9 @@ import { useParams } from "react-router-dom";
 const SimilarBlogs = ({ categories }: { categories: CategoryType[] }) => {
   const { id } = useParams<{ id: string }>();
   const [currentPage, setCurrentPage] = useState(0);
-  const blogs = useAppSelector((state) => state.blogs.blogs);
+  const blogs = useAppSelector((state) => state.blogs.blogs).filter(
+    (blog) => blog.id !== Number(id)
+  );
 
   if (!blogs.length) return null;
 
@@ -37,7 +39,7 @@ const SimilarBlogs = ({ categories }: { categories: CategoryType[] }) => {
             }
             style={{
               backgroundColor:
-                currentPage !== blogs.length / 3 - 1 ? "#5D37F3" : "",
+                currentPage < blogs.length / 3 - 1 ? "#5D37F3" : "",
             }}
           >
             <img src="/right-arrow-white.svg" alt="right-arrow" />
@@ -46,13 +48,12 @@ const SimilarBlogs = ({ categories }: { categories: CategoryType[] }) => {
       </div>
       <div className="blogs">
         {blogs
-          .filter(
-            (blog) =>
-              blog.categories.some((category) =>
-                categories
-                  .map((category) => category.title)
-                  .includes(category.title)
-              ) && blog.id !== Number(id)
+          .filter((blog) =>
+            blog.categories.some((category) =>
+              categories
+                .map((category) => category.title)
+                .includes(category.title)
+            )
           )
           .slice(currentPage * 3, currentPage * 3 + 3)
           .map((blog) => (
