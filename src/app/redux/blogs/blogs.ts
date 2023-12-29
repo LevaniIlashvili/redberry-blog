@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BlogType } from "../../../types/types";
+import axios from "axios";
 
 type InitialStateType = {
   blogs: Array<BlogType>;
@@ -9,14 +10,34 @@ const initialState: InitialStateType = {
   blogs: [],
 };
 
+export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
+  try {
+    const response = await axios.get(
+      "https://api.blog.redberryinternship.ge/api/blogs",
+      {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+        },
+      }
+    );
+    console.log(response);
+    return response.data.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+});
+
 const blogsSlice = createSlice({
   name: "blogs",
   initialState,
-  reducers: {
-    setBlogs: (state, action) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchBlogs.fulfilled, (state, action) => {
+      console.log(action);
+
       const currentDate = new Date();
       const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
+      const currentMonth = currentDate.getMonth() + 1;
       const currentDay = currentDate.getDate();
 
       const blogs = [...action.payload].filter((blog) => {
@@ -34,10 +55,11 @@ const blogsSlice = createSlice({
         );
       });
 
+      console.log("setting blogs", blogs);
+
       state.blogs = blogs;
-    },
+    });
   },
 });
 
-export const { setBlogs } = blogsSlice.actions;
 export default blogsSlice.reducer;
