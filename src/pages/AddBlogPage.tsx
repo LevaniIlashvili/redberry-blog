@@ -7,11 +7,11 @@ import { CategoryType } from "../types/types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AddBlogModal from "../components/AddBlogModal";
-import { setBlogs } from "../app/redux/blogs/blogs";
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch } from "../app/hooks";
+import { fetchBlogs } from "../app/redux/blogs/blogs";
 
 const AddBlogPage = () => {
-  const blogs = useAppSelector((state) => state.blogs.blogs);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
@@ -130,7 +130,7 @@ const AddBlogPage = () => {
       JSON.stringify(categories.map((category) => category.id))
     );
     try {
-      const res = await axios.post(
+      await axios.post(
         "https://api.blog.redberryinternship.ge/api/blogs",
         formData,
         {
@@ -139,9 +139,8 @@ const AddBlogPage = () => {
           },
         }
       );
-      setBlogs([...blogs, res.data]);
+      dispatch(fetchBlogs());
       setIsModalOpen(true);
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
