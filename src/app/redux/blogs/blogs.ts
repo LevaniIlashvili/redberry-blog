@@ -20,7 +20,6 @@ export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
         },
       }
     );
-    console.log(response);
     return response.data.data;
   } catch (error) {
     return Promise.reject(error);
@@ -33,8 +32,6 @@ const blogsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBlogs.fulfilled, (state, action) => {
-      console.log(action);
-
       const currentDate = new Date();
       const currentYear = currentDate.getFullYear();
       const currentMonth = currentDate.getMonth() + 1;
@@ -54,8 +51,6 @@ const blogsSlice = createSlice({
             publishDay <= currentDay)
         );
       });
-
-      console.log("setting blogs", blogs);
 
       state.blogs = blogs;
     });

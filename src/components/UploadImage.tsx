@@ -26,7 +26,6 @@ const UploadImage = ({
         JSON.stringify({ base64String, name: file.name })
       );
 
-      console.log(file);
       setImage({ file, name: file.name });
     };
     reader.readAsDataURL(file);
@@ -39,7 +38,6 @@ const UploadImage = ({
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log(e);
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
 
