@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const AddBlogModal = ({ handleClick }) => {
+const AddBlogModal = ({ handleClick }: { handleClick: () => void }) => {
   return (
     <Wrapper>
       <div className="overlay" onClick={handleClick}></div>
