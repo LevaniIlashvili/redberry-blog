@@ -49,7 +49,7 @@ export const BlogPage = () => {
                 <h4 className="blog-author">{blog.author}</h4>
                 <span className="blog-publish-date">{blog.publish_date}</span>
                 {blog.email && (
-                  <span className="blog-email">•{blog.email}</span>
+                  <span className="blog-email"> • {blog.email}</span>
                 )}
               </div>
               <ul>
