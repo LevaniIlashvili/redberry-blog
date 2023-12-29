@@ -87,6 +87,8 @@ const Wrapper = styled.article`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    margin-bottom: auto;
+    height: 5.6rem;
   }
 
   .blog-description {
