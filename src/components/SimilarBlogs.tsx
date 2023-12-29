@@ -3,8 +3,10 @@ import { useAppSelector } from "../app/hooks";
 import { CategoryType } from "../types/types";
 import BlogCard from "./BlogCard";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const SimilarBlogs = ({ categories }: { categories: CategoryType[] }) => {
+  const { id } = useParams<{ id: string }>();
   const [currentPage, setCurrentPage] = useState(0);
   const blogs = useAppSelector((state) => state.blogs.blogs);
 
@@ -44,12 +46,13 @@ const SimilarBlogs = ({ categories }: { categories: CategoryType[] }) => {
       </div>
       <div className="blogs">
         {blogs
-          .filter((blog) =>
-            blog.categories.some((category) =>
-              categories
-                .map((category) => category.title)
-                .includes(category.title)
-            )
+          .filter(
+            (blog) =>
+              blog.categories.some((category) =>
+                categories
+                  .map((category) => category.title)
+                  .includes(category.title)
+              ) && blog.id !== Number(id)
           )
           .slice(currentPage * 3, currentPage * 3 + 3)
           .map((blog) => (

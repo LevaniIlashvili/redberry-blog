@@ -30,7 +30,7 @@ const BlogCard = ({ blog }: { blog: BlogType }) => {
           })}
         </ul>
         <p className="blog-description">{blog.description}</p>
-        <Link to={`blog/${blog.id}`}>
+        <Link to={`/blog/${blog.id}`}>
           სრულად ნახვა
           <img
             src="src/assets/see-more.svg"

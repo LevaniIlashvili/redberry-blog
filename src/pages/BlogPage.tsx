@@ -11,6 +11,8 @@ export const BlogPage = () => {
 
   useEffect(() => {
     const fetchBlog = async () => {
+      window.scrollTo(0, 0);
+      setBlog(null);
       try {
         const res = await axios.get(
           `https://api.blog.redberryinternship.ge/api/blogs/${id}`,
@@ -20,7 +22,6 @@ export const BlogPage = () => {
             },
           }
         );
-        console.log(res);
         setBlog(res.data);
       } catch (error) {
         console.log(error);
