@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { BlogType } from "../types/types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import SimilarBlogs from "../components/SimilarBlogs";
 
 export const BlogPage = () => {
+  const navigate = useNavigate();
   const [blog, setBlog] = useState<BlogType | null>(null);
   const { id } = useParams<{ id: string }>();
 
@@ -36,6 +37,13 @@ export const BlogPage = () => {
 
   return (
     <Wrapper>
+      <button
+        type="button"
+        className="navigate-home-btn"
+        onClick={() => navigate("/")}
+      >
+        <img src="/left-arrow-black.svg" alt="left arrow" />
+      </button>
       <section className="blog">
         <img src={blog.image} alt="blog-image" className="blog-image" />
         <div className="header">
@@ -73,6 +81,22 @@ const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   background-color: var(--page-background);
+  position: relative;
+
+  .navigate-home-btn {
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 4rem;
+    left: 7.6rem;
+    background-color: var(--white);
+    border: none;
+    cursor: pointer;
+  }
 
   .blog {
     max-width: 72rem;
